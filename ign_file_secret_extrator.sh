@@ -29,10 +29,15 @@ parse_base64() {
     done < $CONFIG_WITH_BASE64_EACH_LINE 
 }
 
+clean_up() {
+    rm $CONFIG_WITH_BASE64_URL_FORMAT $CONFIG_WITH_BASE64_EACH_LINE
+}
+
 if [ -f $FILENAME ]; then
     jqed_jsonfile
     parse_jsons
     parse_base64
+    clean_up
 else
     echo "File not specificed or not found."
 fi
